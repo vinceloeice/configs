@@ -1,0 +1,21 @@
+#!/bin/sh
+export TERM=foot
+export _JAVA_AWT_WM_NONREPARENTING=1
+export GTK_IM_MOUDLE=xim
+export XMODIFIERS=@im=ibus
+export QT_IM_MODULE=ibus
+export XKB_DEFAULT_OPTIONS=caps:escape
+export GDK_BACKEND=wayland
+export XDG_SESSION_TYPE=wayland
+export XCURSOR_THEME=Adwaita
+export QT_STYLE_OVERRIDE=Adwaita-Dark
+export XDG_CURRENT_DESKTOP=sway
+
+if [ -z "$XDG_RUNTIME_DIR" ]
+then
+	mkdir -p /tmp/runtime/toja
+	chmod 700 /tmp/runtime/toja
+	export XDG_RUNTIME_DIR=/tmp/runtime/toja
+fi
+
+exec dbus-run-session sway

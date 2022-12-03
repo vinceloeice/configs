@@ -1,1 +1,3 @@
 # configs
+
+My dotfiles. WTFPL

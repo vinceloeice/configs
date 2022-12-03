@@ -1,0 +1,6 @@
+session = ~/.rtorrent/
+directory = ~/Downloads/
+dht = auto
+protocol.pex.set = yes
+port_range = 50000-50000
+

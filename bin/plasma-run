@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# Initial config
+usage() { echo "Usage: $0 [-s <session> [xorg|wayland]] " 1>&2; exit 1; }
+
+while getopts ":s:" o; do
+  case "${o}" in
+    s)
+      if [[ ${OPTARG} == 'xorg' || ${OPTARG} == 'wayland' ]]; then
+        s=${OPTARG}
+      fi
+      ;;
+    *)
+      usage
+      ;;
+  esac
+done
+shift $((OPTIND-1))
+
+if [ -z "${s}" ]; then
+    usage
+fi
+
+function start_wayland_session {
+  export MOZ_ENABLE_WAYLAND=1
+  export QT_STYLE_OVERRIDE=kvantum
+  export GDK_BACKEND=wayland
+  export XDG_SESSION_TYPE=wayland
+ 
+  exec /usr/bin/startplasma-wayland
+}
+
+function start_xorg_session {
+  export DESKTOP_SESSION=plasma
+  export QT_STYLE_OVERRIDE=kvantum
+
+  exec /usr/bin/startplasma-x11
+}
+
+if [ $s == 'xorg' ]; then
+  start_xorg_session
+elif [ $s == 'wayland' ]; then
+  start_wayland_session
+fi

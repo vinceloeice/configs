@@ -1,0 +1,251 @@
+#xwayland disabled
+
+# Variables
+set $mod Mod4
+set $left h
+set $down j
+set $up k
+set $right l
+set $term foot
+floating_modifier $mod normal
+
+# External scripts
+#exec wlsunset -l 52.2 -L 21.0 & 
+
+# Clipboard
+exec wl-paste -t text --watch clipman store &
+
+#exec swayidle -w \
+#          timeout 300 'swaylock -f -c 000000' \
+#          timeout 600 'swaymsg "output * dpms off"' \
+#               resume 'swaymsg "output * dpms on"' \
+#          before-sleep 'swaylock -f -c 000000'
+
+# I/O configuration
+# Input: swaymsg -t get_inputs
+# Output: swaymsg -t get_outputs
+
+# Input configuration
+input * {
+       dwt enabled
+       tap enabled
+       natural_scroll disabled
+       middle_emulation enabled
+#       accel_profile flat 200
+   }
+
+input * {
+    xkb_layout pl
+    xkb_variant ,nodeadkeys
+    xkb_options caps:swapescape
+    repeat_delay 250
+    repeat_rate 50
+   }
+
+# Output configuration
+#output * bg /home/toja/.config/death.png fill
+output * bg #151515 solid_color
+output HDMI-A-1 resolution 1920x1080 position 1920,0
+
+# Key bindings
+#set $menu dmenu_run -nf '#d8d7d8' -nb '#19111e' -sb '#af2e0e' -fn 'xos4 Terminus 11' | xargs swaymsg exec --
+set $menu exec swaymsg exec -- wofi --show=run
+bindsym $mod+p exec $menu
+
+bindsym $mod+Shift+Return exec $term
+bindsym $mod+q kill
+bindsym $mod+o exec swaylock -f -c 000000
+bindsym $mod+r exec --no-startup-id $term -e nn
+bindsym $mod+w exec --no-startup-id web 
+bindsym $mod+i exec --no-startup-id $term -e htop
+bindsym $mod+v exec --no-startup-id $term -e pulsemixer
+bindsym $mod+m exec --no-startup-id $term -e ncmpcpp
+bindsym --release Print exec grim -g \"$(slurp)" - | wl-copy
+bindsym $mod+c exec clipman pick -t wofi
+
+# mpc
+bindsym $mod+Shift+comma exec mpc prev
+bindsym $mod+Shift+period exec mpc next
+bindsym $mod+Shift+bracketright exec mpc seek +1
+bindsym $mod+Shift+bracketleft exec mpc seek -1
+bindsym $mod+Shift+p exec mpc toggle
+
+# Reload the configuration file
+bindsym $mod+Shift+c reload
+# Exit sway (logs you out of your Wayland session)
+bindsym $mod+Shift+e exec swaynag -t warning -m 'Exit sway' -b 'Y' 'swaymsg exit'
+
+# Function key bindings
+# Audio
+bindsym XF86AudioLowerVolume exec amixer -q set Master 5%- > /dev/null
+bindsym XF86AudioRaiseVolume exec amixer -q set Master 5%+ > /dev/null
+bindsym XF86AudioMute exec amixer -q set Master toggle > /dev/null
+
+# Brightness
+bindsym XF86MonBrightnessDown exec lightdown
+bindsym XF86MonBrightnessUp exec lightup
+
+# Gaps settings
+gaps inner 6
+gaps outer 6
+smart_gaps on
+bindsym $mod+s          gaps inner current plus 5
+bindsym $mod+Shift+s      gaps inner current minus 5
+bindsym $mod+z          gaps outer current plus 5
+bindsym $mod+Shift+z      gaps outer current minus 5
+bindsym $mod+Shift+t        gaps inner current set 15; gaps outer current set 15
+bindsym $mod+Shift+i        resze grow height 10 px or 10 ppt
+bindsym $mod+Shift+o        resize grow width 10 px or 10 ppt
+
+# Moving around:
+# Move your focus around
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+# Or use $mod+[up|down|left|right]
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+# Move the focused window with the same, but add Shift
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+# Ditto, with arrow keys
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+# Workspaces:
+# Switch to workspace
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+#set $ws1 "1:一"
+#set $ws2 "2:二"
+#set $ws3 "3:三"
+#set $ws4 "4:四"
+#set $ws5 "5:五"
+#set $ws6 "6:六"
+#set $ws7 "7:七"
+#set $ws8 "8:八"
+#set $ws9 "9:九"
+#set $ws10 "10"
+
+bindsym $mod+1 workspace $ws1 
+bindsym $mod+2 workspace $ws2 
+bindsym $mod+3 workspace $ws3 
+bindsym $mod+4 workspace $ws4 
+bindsym $mod+5 workspace $ws5 
+bindsym $mod+6 workspace $ws6 
+bindsym $mod+7 workspace $ws7 
+bindsym $mod+8 workspace $ws8 
+bindsym $mod+9 workspace $ws9 
+bindsym $mod+0 workspace $ws10
+# Move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1 
+bindsym $mod+Shift+2 move container to workspace $ws2 
+bindsym $mod+Shift+3 move container to workspace $ws3 
+bindsym $mod+Shift+4 move container to workspace $ws4 
+bindsym $mod+Shift+5 move container to workspace $ws5 
+bindsym $mod+Shift+6 move container to workspace $ws6 
+bindsym $mod+Shift+7 move container to workspace $ws7 
+bindsym $mod+Shift+8 move container to workspace $ws8 
+bindsym $mod+Shift+9 move container to workspace $ws9 
+bindsym $mod+Shift+0 move container to workspace $ws10
+bindsym $mod+apostrophe split horizontal ;; exec $term
+bindsym $mod+slash split vertical ;; exec $term
+# Layout
+bindsym $mod+f fullscreen
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+bindsym $mod+a focus parent
+bindsym $mod+t layout toggle tabbed split
+
+#dwm style
+bindsym $mod+d         layout splitv;\
+                       move left;\
+                       resize grow right 20 px or 20 ppt;\
+                       split v;\
+                       layout stacking
+bindsym $mod+Return move left
+
+# Scratchpad:
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+
+# Resizing containers:
+mode "resize" {
+    # left will shrink the containers width
+    # right will grow the containers width
+    # up will shrink the containers height
+    # down will grow the containers height
+    bindsym $right resize grow width 20px
+    bindsym $up resize shrink height 20px
+    bindsym $down resize grow height 20px
+    bindsym $left resize shrink width 20px
+
+    # Ditto, with arrow keys
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
+
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+e mode "resize"
+
+# Appearance
+font pango: Inconsolata 11
+default_border pixel
+hide_edge_borders none
+smart_borders on
+client.focused #90a959 #90a959 #151515 #151515 #d0d0d0
+
+# set primary gruvbox colorscheme colors
+set $bg #282828
+set $red #cc241d
+set $green #98971a
+set $yellow #d79921
+set $blue #458588
+set $purple #b16286
+set $aqua #689d68
+set $gray #a89984
+set $darkgray #1d2021
+set $white #151515
+
+bar {
+    position top
+    strip_workspace_numbers yes
+    #tray_output none
+    pango_markup disabled
+    font pango: xos4 Terminus 11
+    status_command statbar
+    colors {
+        #                    border  backgr. text
+        focused_workspace    $aqua $aqua $darkgray
+        inactive_workspace   $darkgray $darkgray $yellow
+        active_workspace     $darkgray $darkgray $yellow
+        urgent_workspace     $red $red $bg
+    }
+}
+
+# class                 border|backgr|text|indicator|child_border
+client.focused          $blue $blue $white $white #d0d0d0
+client.focused_inactive $darkgray $darkgray $yellow $purple $darkgray
+client.unfocused        $darkgray $darkgray $yellow $purple $darkgray
+client.urgent           $red $red $white $red $red
+
+include /etc/sway/config.d/*

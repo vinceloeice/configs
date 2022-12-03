@@ -1,0 +1,21 @@
+pkgname=systemd-dummy
+pkgver=0.0.5
+pkgrel=2
+pkgdesc="Trick Arch into thinking it has its systemd packages installed."
+url="http://www.archlinux.org/"
+arch=('any')
+license=('GPL')
+depends=()
+optdepends=()
+makedepends=()
+replaces=()
+conflicts=('systemd' 'systemd-libs' $(pacman -Sgq qemu ungoogled-chromium))
+provides=('systemd' 'systemd-libs' $(pacman -Sgq qemu ungoogled-chromium))
+
+build() {
+   echo "Nothing to build"
+}
+
+package() {
+   echo "Nothing to package"
+}
