@@ -126,7 +126,7 @@ function gnome_setup() {
   xdg-desktop-portal-gnome xdg-user-dirs-gtk'
   # audio
   packages+=' pipewire pipewire-alsa pipewire-pulse wireplumber gst-plugin-gtk
-  gst-libav gst-plugin-pipewire gst-plugins-good'
+  gst-libav gst-plugin-pipewire gst-plugins-good gstreamer-vaapi'
   # network
   packages+=' networkmanager-iwd'
   # optional
