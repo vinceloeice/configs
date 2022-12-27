@@ -125,25 +125,24 @@ function gnome_setup() {
   gnome-tweaks gnome-system-monitor wl-clipboard xdg-desktop-portal
   xdg-desktop-portal-gnome xdg-user-dirs-gtk'
   # audio
-  packages+=' pipewire pipewire-alsa pipewire-pulse wireplumber gst-plugin-gtk
-  gst-libav gst-plugin-pipewire gst-plugins-good gstreamer-vaapi'
+  packages+=' pipewire pipewire-alsa pipewire-pulse pipewire-jack wireplumber
+  gst-plugin-gtk gst-libav gst-plugin-pipewire gst-plugins-good
+  gstreamer-vaapi'
   # network
   packages+=' networkmanager-iwd'
   # optional
   packages+=' gdm gnome-keyring seahorse alacarte power-profiles-daemon
   gvfs-google gnome-remote-desktop gnome-user-share rygel file-roller baobab
   gnome-boxes gnome-connections gnome-clocks gnome-weather gnome-calculator
-  gnome-characters gnome-color-manager gnome-font-viewer gnome-logs gnome-text-editor'
+  gnome-characters gnome-font-viewer gnome-logs gnome-text-editor'
   # misc
-  packages+=' ungoogled-chromium epiphany thunderbird nautilus eog evince warp
-  celluloid amberol deluge-gtk dino python-setuptools ffmpegthumbnailer yt-dlp'
+  packages+=' ungoogled-chromium epiphany thunderbird nautilus eog evince 
+  celluloid amberol dino rnote ffmpegthumbnailer yt-dlp'
   # extensions
   extend+=' gnome-shell-extension-appindicator
   gnome-shell-extension-dash-to-dock
-  gnome-shell-pomodoro
   gnome-shell-extension-unite-git
   gnome-shell-extension-blur-my-shell-git
-  gnome-shell-extension-runcat-git
   gnome-shell-extension-quick-settings-tweaks-git'
   # ubuntu tweaks
   packages+=' yaru-gnome-shell-theme yaru-sound-theme yaru-gtksourceview-theme
@@ -156,7 +155,7 @@ function gnome_setup() {
   gsettings set org.gnome.desktop.background primary-color 151515
 #  gsettings set org.gnome.shell disable-extension-version-validation "true"
 
-  mkdir -p /usr/share/gnome-shell/modes
+  sudo mkdir -p /usr/share/gnome-shell/modes
   sudo sh -c 'cat >> /usr/share/gnome-shell/modes/rice.json' <<EOF 
 {
     "parentMode": "user",
